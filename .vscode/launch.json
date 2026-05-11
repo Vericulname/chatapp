@@ -1,0 +1,24 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-ChatroomserviceApplication<chatroomservice>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.sangng.chatroomservice.ChatroomserviceApplication",
+            "projectName": "chatroomservice",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+         {
+            "type": "java",
+            "name": "Spring Boot-ChatroomserviceApplication<chatroomservice> 8081",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.sangng.chatroomservice.ChatroomserviceApplication",
+            "projectName": "chatroomservice",
+            "args": "--server.port=8081",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
