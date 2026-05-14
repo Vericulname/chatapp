@@ -3,6 +3,7 @@ package com.sangng.chatroomservice.model;
 import java.util.List;
 
 import jakarta.annotation.Nonnull;
+import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,7 +27,7 @@ public class ChatRoom {
     private Long id;
 
     @ElementCollection
-    @Nonnull
+    @Column(unique = true, nullable = false)
     private List<Long> participantIds;
 
     @OneToMany(mappedBy = "chatRoom",orphanRemoval=true,cascade = jakarta.persistence.CascadeType.ALL)

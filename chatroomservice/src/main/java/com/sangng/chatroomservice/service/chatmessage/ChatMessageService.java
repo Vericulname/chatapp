@@ -7,9 +7,10 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import com.sangng.chatroomservice.dto.ChatMessageDto;
+import com.sangng.chatroomservice.feigninterface.AccountInterface;
 import com.sangng.chatroomservice.model.ChatMessage;
 import com.sangng.chatroomservice.model.ChatRoom;
-import com.sangng.chatroomservice.repository.ChatRoomRepository;
+
 import com.sangng.chatroomservice.repository.MessageRepository;
 import com.sangng.chatroomservice.request.createChatMessageRequest;
 import com.sangng.chatroomservice.service.chatroom.IChatRoomService;
@@ -22,14 +23,21 @@ public class ChatMessageService implements IChatMessageService {
 
     private final MessageRepository messageRepository;
     private final IChatRoomService chatRoomService;
+    private final AccountInterface accountInterface;
     private final ModelMapper modelMapper;
 
     @Override
     public ChatMessage sendMessage(createChatMessageRequest request) {
        
         
-        return Optional.of(request).map(messages -> {
+        return Optional.of(request).map((createChatMessageRequest messages) -> {
             ChatRoom chatRoom = chatRoomService.getChatRoom(request.getChatRoomId());
+            
+            try {
+                accountInterface.getAccountById(request.getSenderId());
+            } catch (RuntimeException e) {
+                throw new RuntimeException("Sender not found with id: " + request.getSenderId());
+            }
             
             ChatMessage message = new ChatMessage();
             message.setChatRoom(chatRoom);
@@ -49,7 +57,11 @@ public class ChatMessageService implements IChatMessageService {
 
     @Override
     public List<ChatMessage> getMessagesfromChatRoom(Long chatRoomId) {
+        if (chatRoomService.getChatRoom(chatRoomId) == null) {
+            throw new RuntimeException("Chat room not found with id: " + chatRoomId);
+        }
         return messageRepository.findByChatRoomId(chatRoomId);
+        
     }
 
     @Override

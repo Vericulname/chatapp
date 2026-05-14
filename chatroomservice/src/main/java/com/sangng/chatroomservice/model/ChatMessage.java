@@ -1,5 +1,6 @@
 package com.sangng.chatroomservice.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,8 +23,10 @@ public class ChatMessage {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable=false)
     private Long senderId;
 
+    @Column(nullable=false)
     private String content;
     private java.time.LocalDateTime timestamp;
 

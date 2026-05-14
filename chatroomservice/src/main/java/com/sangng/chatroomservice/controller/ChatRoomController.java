@@ -17,6 +17,10 @@ import lombok.RequiredArgsConstructor;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.sangng.chatroomservice.model.ChatRoomWrapper;
+
 
 
 @Controller
@@ -32,11 +36,20 @@ public class ChatRoomController {
     }
 
      @GetMapping("/getById/{id}")
-    public ResponseEntity<ApiRespone> getChatRoomById(@PathVariable("id") Long id) {
+     public ResponseEntity<ApiRespone> getChatRoomById(@PathVariable("id") Long id) {
+         try {
+             ChatRoom chatRoom = chatRoomService.getChatRoom(id);
+             ChatRoomDto chatRoomDto = chatRoomService.toDto(chatRoom);
+             return ResponseEntity.ok(new ApiRespone("Chat room retrieved successfully", chatRoomDto));
+         } catch (RuntimeException e) {
+             return ResponseEntity.status(404).body(new ApiRespone(e.getMessage(), null));
+         }
+     }
+    @GetMapping("/getByUserId/{userId}")
+    public ResponseEntity<ApiRespone> getChatRoomsForUser(@PathVariable("userId") Long userId) {
         try {
-            ChatRoom chatRoom = chatRoomService.getChatRoom(id);
-            ChatRoomDto chatRoomDto = chatRoomService.toDto(chatRoom);
-            return ResponseEntity.ok(new ApiRespone("Chat room retrieved successfully", chatRoomDto));
+            List<ChatRoomDto> chatRooms = chatRoomService.getChatRoomsForUser(userId);
+            return ResponseEntity.ok(new ApiRespone("Chat rooms for user retrieved successfully", chatRooms));
         } catch (RuntimeException e) {
             return ResponseEntity.status(404).body(new ApiRespone(e.getMessage(), null));
         }
@@ -44,10 +57,14 @@ public class ChatRoomController {
 
     @PostMapping("/create")
     public ResponseEntity<ApiRespone> createRoom(@RequestBody List<Long> participantIds) {
-        
-        ChatRoom chatRoom = chatRoomService.createChatRoom(participantIds);
-        ChatRoomDto chatRoomDto = chatRoomService.toDto(chatRoom);
-        return ResponseEntity.ok(new ApiRespone("Chat room created successfully", chatRoomDto));
+        try {
+   
+            ChatRoomWrapper chatRoomWrapper = chatRoomService.createChatRoom(participantIds);
+            return ResponseEntity.ok(new ApiRespone("Chat room created successfully", chatRoomWrapper));
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(400).body(new ApiRespone(e.getMessage(), null));
+        }
+       
     }
     
 }

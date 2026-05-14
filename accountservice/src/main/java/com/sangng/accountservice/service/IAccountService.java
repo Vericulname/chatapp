@@ -20,4 +20,6 @@ public interface IAccountService {
     AccountDto toDto(Account account);
 
     List<AccountDto> toDtoList(List<Account> accounts);
+
+    
 }

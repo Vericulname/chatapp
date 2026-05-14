@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "ServiceregisterApplication",
+            "request": "launch",
+            "mainClass": "com.sangn.serviceregister.ServiceregisterApplication",
+            "projectName": ""
+        },
+        {
+            "type": "java",
             "name": "Spring Boot-ChatroomserviceApplication<chatroomservice>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
@@ -10,7 +17,7 @@
             "args": "",
             "envFile": "${workspaceFolder}/.env"
         },
-         {
+        {
             "type": "java",
             "name": "Spring Boot-ChatroomserviceApplication<chatroomservice> 8081",
             "request": "launch",
@@ -18,6 +25,49 @@
             "mainClass": "com.sangng.chatroomservice.ChatroomserviceApplication",
             "projectName": "chatroomservice",
             "args": "--server.port=8081",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-AccountserviceApplication<accountservice>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.sangng.accountservice.AccountserviceApplication",
+            "projectName": "accountservice",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-AccountserviceApplication<accountservice> 8082",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.sangng.accountservice.AccountserviceApplication",
+            "projectName": "accountservice",
+            "args": "--server.port=8082",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-ServiceregisterApplication<serviceregister>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.sangn.serviceregister.ServiceregisterApplication",
+            "projectName": "serviceregister",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env",
+            "noDebug": true,
+            "__progressId": "b31eefb7-69a7-4903-ae88-079b7c4e36b6",
+            "__origin": "internal"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-ApigatewayApplication<apigateway>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.sangng.apigateway.ApigatewayApplication",
+            "projectName": "apigateway",
+            "args": "",
             "envFile": "${workspaceFolder}/.env"
         }
     ]

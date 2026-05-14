@@ -1,11 +1,15 @@
 package com.sangng.chatroomservice.respone;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class ApiRespone {
-    private final  String message;
-    private final  Object data;
+    private  String message;
+    private  Object data;
 
 }

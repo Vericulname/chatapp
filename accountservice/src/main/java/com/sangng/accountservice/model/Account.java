@@ -29,6 +29,5 @@ public class Account {
     @Nonnull
     private String password;
 
-    @ElementCollection
-    private List<Long> chatRoomIds;
+
 }
