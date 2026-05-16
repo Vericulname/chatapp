@@ -27,7 +27,7 @@ public class ChatRoom {
     private Long id;
 
     @ElementCollection
-    @Column(unique = true, nullable = false)
+    @Column( nullable = false)
     private List<Long> participantIds;
 
     @OneToMany(mappedBy = "chatRoom",orphanRemoval=true,cascade = jakarta.persistence.CascadeType.ALL)
